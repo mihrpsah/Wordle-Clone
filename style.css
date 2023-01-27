@@ -23,11 +23,12 @@ body{
 .key{
     font-size: inherit;
     grid-column: span 2; 
-    background-color: hsl(
-        var(--hue, 200)
+    /* background-color: hsl(
+        var(--hue, 200),
         var(--saturation, 1%),
         calc(var(--lightness-offset, 0%)+var(--lightness, 51%))
-        );
+        ); */
+        background-color: grey;
     color: #FFF;
     fill: #FFF;
     text-transform: uppercase;
@@ -44,18 +45,22 @@ body{
     height: 1.75em;
 }
 .key:hover, .key:focus{
-     --lightness-offset: 10%;
+     /* --lightness-offset: 10%; */
+     opacity: 75%;
 }
 .key.wrong{
-    --lightness: 23%;
+    /* --lightness: 23%; */
+    opacity: 50%;
 }
 .key.wrong-location{
-    --hue: 49;
+    /* --hue: 49;
     --saturation: 51%;
-    --lightness: 47%;
+    --lightness: 47%; */
+    background-color: orange;
 }
 .key.correct{
-    --hue: 115;
+    /* --hue: 115;
     --saturation: 29%;
-    --lightness: 43%;
+    --lightness: 43%; */
+    background-color: green;
 }
