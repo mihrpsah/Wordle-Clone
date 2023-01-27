@@ -15297,17 +15297,21 @@ const offsetFromDate = new Date(2023, 0, 1);
 const msOffset = Date.now() - offsetFromDate;
 const dayOffset = msOffset /1000/60/60/24;
 const targetWord = targetWords[Math.floor(dayOffset)];
+const keyboard = document.querySelector("[data-keyboard]");
+const FLIP_ANIMATION_DURATION = 500;
 
   startInteraction();
 
 function startInteraction(){
     document.addEventListener('click', handleMouseClick);
     document.addEventListener('keydown', handleKeyPress);
+    console.log("Interaction started")
 }
 
 function stopInteraction(){
     document.removeEventListener('click', handleMouseClick);
     document.removeEventListener('keydown', handleKeyPress);
+    console.log("interaction stopped")
 }
 
 function handleMouseClick(e){
@@ -15368,7 +15372,31 @@ function submitGuess(){
         return;
     }
     
+    // const guess = activeTiles.reduce((word = '', tile)=>{
+    //      return word = word + tile.dataset.letter;
+
+    // })
     
+    
+    const guess = [...activeTiles].map(tile => tile.dataset.letter).join('')
+    console.log(guess);
+
+
+    if(!dictionary.includes(guess)){
+        showAlert("NOT IN WORD LIST");
+        shakeTiles(activeTiles);
+        return;
+    }
+    stopInteraction();
+    activeTiles.forEach((...params) => flipTile(...params, guess));
+}
+function flipTile(tile, index, array, guess){
+      const letter = tile.dataset.letter;
+      const key = keyboard.querySelector('[data-state = "active"]');
+
+      setTimeout(()=>{
+        tile.classList.add("flip");
+      }, index*FLIP_ANIMATION_DURATION/2 )
 }
 
 function showAlert(message, duration = 1000){
